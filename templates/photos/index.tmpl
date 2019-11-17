@@ -1,0 +1,8 @@
+{{ template "head.tmpl" }}
+
+<p>List photos here</p>
+<div id='drop-target'>
+{{ range . }}<img src="{{.Location}}"></img>{{end}}
+</div>
+
+{{ template "footer.tmpl" }}
