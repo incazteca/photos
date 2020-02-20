@@ -2,9 +2,6 @@ package web
 
 import (
 	"database/sql"
-	"encoding/json"
-	"fmt"
-	"github.com/incazteca/photos/services/photos"
 	"html/template"
 	"log"
 	"net/http"
@@ -46,52 +43,4 @@ func (env *Env) routes() {
 
 	http.HandleFunc("/", env.getPhotos)
 	http.HandleFunc("/photo", env.handlePhoto)
-}
-
-func (env *Env) getPhotos(w http.ResponseWriter, r *http.Request) {
-	if r.URL.Path != "/" {
-		http.NotFound(w, r)
-		return
-	}
-
-	if r.Method == "GET" {
-		photos, err := photos.FetchAll(env.db)
-
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-		}
-
-		t = template.Must(
-			template.ParseFiles(
-				"templates/common/head.tmpl",
-				"templates/photos/index.tmpl",
-				"templates/common/footer.tmpl",
-			),
-		)
-		err = t.ExecuteTemplate(w, "index.tmpl", photos)
-
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-		}
-	}
-}
-
-func (env *Env) handlePhoto(w http.ResponseWriter, r *http.Request) {
-	if r.URL.Path != "/photo" {
-		http.NotFound(w, r)
-		return
-	}
-
-	if r.Method == "POST" {
-		recordID, err := photos.Create(env.db, r.Body)
-
-		if err != nil {
-			fmt.Println(err)
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-		}
-
-		w.WriteHeader(http.StatusOK)
-		json.NewEncoder(w).Encode(SuccessCreate{recordID})
-		return
-	}
 }
