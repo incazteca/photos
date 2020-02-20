@@ -5,10 +5,7 @@ import (
 	"database/sql/driver"
 	"encoding/json"
 	"errors"
-	"github.com/gofrs/uuid"
 	"github.com/incazteca/photos/models"
-	"io"
-	"os"
 )
 
 type PhotoPersistence struct {
