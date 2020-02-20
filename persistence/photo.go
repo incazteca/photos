@@ -2,9 +2,6 @@ package persistence
 
 import (
 	"database/sql"
-	"database/sql/driver"
-	"encoding/json"
-	"errors"
 	"github.com/incazteca/photos/models"
 )
 
@@ -12,38 +9,8 @@ type PhotoPersistence struct {
 	db *sql.DB
 }
 
-// Exif Exif data for a photo
-type Exif map[string]interface{}
-
 func NewPhotoPersistence(db *sql.DB) PhotoPersistence {
 	return PhotoPersistence{db}
-}
-
-// Value a function that satisfies the driver.Value interface in database/sql
-func (exif Exif) Value() (driver.Value, error) {
-	j, err := json.Marshal(exif)
-	return j, err
-}
-
-// Scan a function that satisfies the driver.Scan interface in database/sql
-func (exif *Exif) Scan(src interface{}) error {
-	source, ok := src.([]byte)
-	if !ok {
-		return errors.New("Type assertion []byte failed")
-	}
-
-	var i interface{}
-	err := json.Unmarshal(source, &i)
-	if err != nil {
-		return err
-	}
-
-	*exif, ok = i.(map[string]interface{})
-	if !ok {
-		return errors.New("Type assertion map[string]interface{} failed")
-	}
-
-	return nil
 }
 
 func (p *PhotoPersistence) FetchAll() ([]*models.Photo, error) {
