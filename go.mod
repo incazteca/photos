@@ -44,7 +44,6 @@ require (
 	github.com/pierrec/lz4 v2.2.6+incompatible // indirect
 	github.com/remyoudompheng/bigfft v0.0.0-20190728182440-6a916e37a237 // indirect
 	github.com/rogpeppe/go-internal v1.3.1 // indirect
-	github.com/satori/go.uuid v1.2.0
 	github.com/shopspring/decimal v0.0.0-20191009025716-f1972eb1d1f5 // indirect
 	github.com/tidwall/pretty v1.0.0 // indirect
 	github.com/xanzy/go-gitlab v0.22.1 // indirect
