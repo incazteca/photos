@@ -3,7 +3,7 @@ package main
 import (
 	"database/sql"
 	"fmt"
-	"github.com/incazteca/photos/web"
+	"github.com/incazteca/services"
 	_ "github.com/lib/pq"
 	"os"
 	"strconv"
@@ -18,8 +18,26 @@ func main() {
 	db := connectToDb()
 	defer db.Close()
 
+	mux := http.NewServeMux()
+
+	homeDir, _ := os.UserHomeDir()
+	mux.Handle(
+		"/storage/",
+		http.StripPrefix("/storage/", mux.FileServer(http.Dir(homeDir+"/storage"))),
+	)
+	mux.Handle(
+		"/static/",
+		http.StripPrefix("/static/", mux.FileServer(http.Dir("static"))),
+	)
+
+	http.HandleFunc("/", env.getPhotos)
+	http.HandleFunc("/photo", env.handlePhoto)
+
+	photoService := services.NewPhotoService(db)
+	photoHandler := routers.NewPhotoHandler(mux, photoService)
+
 	fmt.Println("Start server")
-	web.StartServer(db)
+	log.Fatal(mux.ListenAndServe(":8080", nil))
 }
 
 // TODO, best thing to do here is probably keep the connection string and then
