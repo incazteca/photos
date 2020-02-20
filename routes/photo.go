@@ -34,7 +34,7 @@ func (handler *PhotoHandler) getPhotos(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 		}
 
-		t = template.Must(
+		t := template.Must(
 			template.ParseFiles(
 				"templates/common/head.tmpl",
 				"templates/photos/index.tmpl",
@@ -56,7 +56,7 @@ func (handler *PhotoHandler) handlePhoto(w http.ResponseWriter, r *http.Request)
 	}
 
 	if r.Method == "POST" {
-		recordID, err := handler.StorePhoto(r.Body)
+		recordID, err := handler.photoService.StorePhoto(r.Body)
 
 		if err != nil {
 			fmt.Println(err)
@@ -64,7 +64,7 @@ func (handler *PhotoHandler) handlePhoto(w http.ResponseWriter, r *http.Request)
 		}
 
 		w.WriteHeader(http.StatusOK)
-		json.NewEncoder(w).Encode(SuccessCreate{recordID})
+		json.NewEncoder(w).Encode(map[string]int{"record_id": recordID})
 		return
 	}
 }
