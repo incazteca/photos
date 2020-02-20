@@ -18,6 +18,10 @@ func NewPhotoService(photoPersist persistence.PhotoPersistence) PhotoService {
 	return PhotoService{photoPersist}
 }
 
+func (ps *PhotoService) FetchAll() ([]*models.Photo, error) {
+	return ps.FetchAll()
+}
+
 // StorePhoto stores photo in database
 func (ps *PhotoService) StorePhoto(rawPhoto io.ReadCloser) (int, error) {
 	fileName := createFileName()
