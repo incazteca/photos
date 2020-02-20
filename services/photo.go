@@ -19,7 +19,7 @@ func NewPhotoService(photoPersist persistence.PhotoPersistence) PhotoService {
 }
 
 func (ps *PhotoService) FetchAll() ([]*models.Photo, error) {
-	return ps.FetchAll()
+	return ps.photoPersist.FetchAll()
 }
 
 // StorePhoto stores photo in database
