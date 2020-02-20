@@ -6,6 +6,7 @@ require (
 	cloud.google.com/go v0.48.0 // indirect
 	cloud.google.com/go/spanner v1.1.0 // indirect
 	cloud.google.com/go/storage v1.3.0 // indirect
+	github.com/Masterminds/squirrel v1.2.0 // indirect
 	github.com/Microsoft/go-winio v0.4.14 // indirect
 	github.com/aws/aws-sdk-go v1.25.36 // indirect
 	github.com/cockroachdb/cockroach-go v0.0.0-20190925194419-606b3d062051 // indirect
