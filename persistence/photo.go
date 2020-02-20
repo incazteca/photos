@@ -14,7 +14,7 @@ func NewPhotoPersistence(db *sql.DB) PhotoPersistence {
 }
 
 func (p *PhotoPersistence) FetchAll() ([]*models.Photo, error) {
-	rows, err := p.db.Query("SELECT id, location, exif FROM photos")
+	rows, err := p.db.Query("SELECT id, location FROM photos")
 
 	if err != nil {
 		return nil, err
@@ -25,7 +25,7 @@ func (p *PhotoPersistence) FetchAll() ([]*models.Photo, error) {
 	photos := make([]*models.Photo, 0)
 	for rows.Next() {
 		photo := new(models.Photo)
-		err := rows.Scan(&photo.ID, &photo.Location, &photo.Exif)
+		err := rows.Scan(&photo.ID, &photo.Location)
 		if err != nil {
 			return nil, err
 		}
