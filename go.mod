@@ -6,6 +6,7 @@ require (
 	cloud.google.com/go v0.48.0 // indirect
 	cloud.google.com/go/spanner v1.1.0 // indirect
 	cloud.google.com/go/storage v1.3.0 // indirect
+	github.com/Masterminds/squirrel v1.2.0 // indirect
 	github.com/Microsoft/go-winio v0.4.14 // indirect
 	github.com/aws/aws-sdk-go v1.25.36 // indirect
 	github.com/cockroachdb/cockroach-go v0.0.0-20190925194419-606b3d062051 // indirect
@@ -44,7 +45,6 @@ require (
 	github.com/pierrec/lz4 v2.2.6+incompatible // indirect
 	github.com/remyoudompheng/bigfft v0.0.0-20190728182440-6a916e37a237 // indirect
 	github.com/rogpeppe/go-internal v1.3.1 // indirect
-	github.com/satori/go.uuid v1.2.0
 	github.com/shopspring/decimal v0.0.0-20191009025716-f1972eb1d1f5 // indirect
 	github.com/tidwall/pretty v1.0.0 // indirect
 	github.com/xanzy/go-gitlab v0.22.1 // indirect
